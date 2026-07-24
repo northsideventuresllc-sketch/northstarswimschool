@@ -1,47 +1,48 @@
 <svg viewBox="0 0 400 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="North-Stars Swim School crest">
   <defs>
-    <linearGradient id="shieldFill" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2f7fb8"/>
-      <stop offset="1" stop-color="#1b5e94"/>
+    <linearGradient id="starL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e21b2c"/><stop offset="1" stop-color="#c1121f"/>
     </linearGradient>
-    <linearGradient id="starLeft" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#e21b2c"/>
-      <stop offset="1" stop-color="#c1121f"/>
-    </linearGradient>
-    <linearGradient id="starRight" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#9d0208"/>
-      <stop offset="1" stop-color="#c1121f"/>
+    <linearGradient id="starR" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9d0208"/><stop offset="1" stop-color="#c1121f"/>
     </linearGradient>
   </defs>
 
-  <!-- Shield outer + inner outline -->
-  <path d="M200 14 L372 74 V230 C372 330 300 400 200 428 C100 400 28 330 28 230 V74 Z"
-        fill="#0a1024" />
-  <path d="M200 30 L356 84 V228 C356 320 292 384 200 410 C108 384 44 320 44 228 V84 Z"
-        fill="url(#shieldFill)" stroke="#0a1024" stroke-width="10"/>
-  <path d="M200 52 L336 100 V226 C336 308 280 364 200 388 C120 364 64 308 64 226 V100 Z"
-        fill="none" stroke="#0a1024" stroke-width="6" opacity="0.85"/>
+  <!-- Shield: navy rim, white body, inner navy line -->
+  <path d="M200 14 L372 74 V230 C372 330 300 400 200 428 C100 400 28 330 28 230 V74 Z" fill="#13223f"/>
+  <path d="M200 30 L356 84 V228 C356 320 292 384 200 410 C108 384 44 320 44 228 V84 Z" fill="#f5f7fb"/>
+  <path d="M200 52 L336 100 V226 C336 308 280 364 200 388 C120 364 64 308 64 226 V100 Z" fill="none" stroke="#13223f" stroke-width="6"/>
 
-  <!-- 3D five point star -->
-  <g class="crest-star">
-    <polygon points="200,96 224,168 200,150" fill="url(#starLeft)"/>
-    <polygon points="200,96 176,168 200,150" fill="url(#starRight)"/>
-    <polygon points="200,150 176,168 108,168 164,206" fill="url(#starLeft)"/>
-    <polygon points="200,150 224,168 292,168 236,206" fill="url(#starRight)"/>
-    <polygon points="164,206 145,276 200,232" fill="url(#starLeft)"/>
-    <polygon points="236,206 255,276 200,232" fill="url(#starRight)"/>
+  <!-- 3D five-point star -->
+  <g class="crest-star" style="transform-origin:200px 190px">
+    <polygon points="200,96 224,168 200,150" fill="url(#starL)"/>
+    <polygon points="200,96 176,168 200,150" fill="url(#starR)"/>
+    <polygon points="200,150 176,168 108,168 164,206" fill="url(#starL)"/>
+    <polygon points="200,150 224,168 292,168 236,206" fill="url(#starR)"/>
+    <polygon points="164,206 145,276 200,232" fill="url(#starL)"/>
+    <polygon points="236,206 255,276 200,232" fill="url(#starR)"/>
     <polygon points="164,206 200,232 200,150" fill="#e21b2c"/>
     <polygon points="236,206 200,232 200,150" fill="#a80f1a"/>
   </g>
 
-  <!-- Water waves -->
-  <g fill="#3fa9e0">
-    <path d="M70 250 q22 -16 44 0 t44 0 t44 0 t44 0 t44 0 v18 q-22 16 -44 0 t-44 0 t-44 0 t-44 0 t-44 0 Z" opacity="0.95"/>
-    <path d="M70 272 q22 -14 44 0 t44 0 t44 0 t44 0 t44 0 v14 q-22 14 -44 0 t-44 0 t-44 0 t-44 0 t-44 0 Z" fill="#2b6ea3" opacity="0.7"/>
+  <!-- Splash droplets -->
+  <g fill="#4aa3d8">
+    <circle cx="150" cy="244" r="4"/><circle cx="252" cy="244" r="4"/>
+    <circle cx="176" cy="236" r="3"/><circle cx="228" cy="238" r="3"/>
   </g>
 
+  <!-- Water band -->
+  <path d="M64 252 q22 -16 44 0 t44 0 t44 0 t44 0 t44 0 v20 q-22 16 -44 0 t-44 0 t-44 0 t-44 0 t-44 0 Z" fill="#4aa3d8"/>
+  <path d="M64 272 q22 -14 44 0 t44 0 t44 0 t44 0 t44 0 v16 q-22 14 -44 0 t-44 0 t-44 0 t-44 0 t-44 0 Z" fill="#2f7fb8" opacity="0.9"/>
+
   <!-- Banner ribbon -->
-  <path d="M40 300 Q200 284 360 300 L352 356 Q200 340 48 356 Z" fill="#f5f7fb" stroke="#0a1024" stroke-width="9"/>
-  <text x="200" y="333" text-anchor="middle" font-family="'Arial Black', Arial, sans-serif"
-        font-weight="900" font-size="30" letter-spacing="1.5" fill="#0a1024">NORTH-STARS</text>
+  <path d="M36 298 Q200 282 364 298 L356 356 Q200 340 44 356 Z" fill="#f5f7fb" stroke="#13223f" stroke-width="8"/>
+  <text x="200" y="331" text-anchor="middle" font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+        font-weight="800" font-size="20" letter-spacing="0.2" fill="#13223f" textLength="300" lengthAdjust="spacingAndGlyphs">NORTH-STARS SWIM SCHOOL</text>
+
+  <!-- Swimmer wave motif -->
+  <g fill="none" stroke="#13223f" stroke-width="5" stroke-linecap="round">
+    <path d="M126 372 q74 32 148 0"/>
+    <path d="M140 388 q60 24 120 0"/>
+  </g>
 </svg>
