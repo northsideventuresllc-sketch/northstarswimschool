@@ -1,0 +1,77 @@
+<svg viewBox="0 0 1000 560" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="North-Stars Swim School">
+  <defs>
+    <linearGradient id="hStarL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#e21b2c"/><stop offset="1" stop-color="#c1121f"/></linearGradient>
+    <linearGradient id="hStarR" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#9d0208"/><stop offset="1" stop-color="#c1121f"/></linearGradient>
+  </defs>
+
+  <!-- Star -->
+  <g transform="translate(500,92) scale(0.52) translate(-200,-186)">
+    <polygon points="200,96 224,168 200,150" fill="url(#hStarL)"/>
+    <polygon points="200,96 176,168 200,150" fill="url(#hStarR)"/>
+    <polygon points="200,150 176,168 108,168 164,206" fill="url(#hStarL)"/>
+    <polygon points="200,150 224,168 292,168 236,206" fill="url(#hStarR)"/>
+    <polygon points="164,206 145,276 200,232" fill="url(#hStarL)"/>
+    <polygon points="236,206 255,276 200,232" fill="url(#hStarR)"/>
+    <polygon points="164,206 200,232 200,150" fill="#e21b2c"/>
+    <polygon points="236,206 200,232 200,150" fill="#a80f1a"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="500" y="228" text-anchor="middle" font-family="'Barlow Condensed','Arial Narrow',sans-serif"
+        font-weight="800" font-size="96" letter-spacing="1" fill="#13223f"
+        textLength="880" lengthAdjust="spacingAndGlyphs">NORTH-STARS SWIM SCHOOL</text>
+  <!-- Red underline -->
+  <rect x="330" y="250" width="340" height="14" rx="7" fill="#d21f2b"/>
+
+  <!-- Swimmer -->
+  <g>
+    <!-- Splash (behind swimmer) -->
+    <g fill="#a7d8f0">
+      <path d="M300 470 q40 -46 120 -34 q-30 26 -8 62 q-70 18 -112 -28 Z"/>
+      <path d="M700 470 q-40 -46 -120 -34 q30 26 8 62 q70 18 112 -28 Z"/>
+      <path d="M360 508 q140 -44 280 0 q-140 46 -280 0 Z"/>
+    </g>
+    <g fill="#d8f0fb">
+      <path d="M400 500 q100 -30 200 0 q-100 34 -200 0 Z"/>
+    </g>
+    <!-- droplets -->
+    <g fill="#a7d8f0">
+      <circle cx="250" cy="452" r="7"/><circle cx="228" cy="430" r="5"/><circle cx="288" cy="430" r="4"/>
+      <circle cx="750" cy="452" r="7"/><circle cx="772" cy="430" r="5"/><circle cx="712" cy="430" r="4"/>
+      <circle cx="470" cy="520" r="5"/><circle cx="540" cy="522" r="5"/>
+    </g>
+
+    <!-- Arms (mirrored) -->
+    <g fill="#13223f">
+      <!-- left arm -->
+      <path d="M452 372
+               C372 350 300 350 236 366
+               C176 380 128 372 96 352
+               C112 384 150 404 214 408
+               C286 412 372 404 452 396 Z"/>
+      <!-- right arm -->
+      <path d="M548 372
+               C628 350 700 350 764 366
+               C824 380 872 372 904 352
+               C888 384 850 404 786 408
+               C714 412 628 404 548 396 Z"/>
+    </g>
+
+    <!-- Torso / shoulders -->
+    <path d="M416 360 Q500 336 584 360 L574 410 Q556 460 516 486 Q500 496 484 486 Q444 460 426 410 Z" fill="#13223f"/>
+
+    <!-- Face -->
+    <ellipse cx="500" cy="336" rx="46" ry="43" fill="#f4f7fb"/>
+    <!-- Cap -->
+    <path d="M453 340 Q449 284 500 282 Q551 284 547 340 Q525 330 500 330 Q475 330 453 340 Z" fill="#13223f"/>
+    <!-- Goggle strap -->
+    <path d="M456 330 Q500 320 544 330" stroke="#13223f" stroke-width="9" fill="none"/>
+    <!-- Goggles -->
+    <g>
+      <rect x="466" y="326" width="28" height="21" rx="9" fill="#bfe3f5" stroke="#13223f" stroke-width="5"/>
+      <rect x="506" y="326" width="28" height="21" rx="9" fill="#bfe3f5" stroke="#13223f" stroke-width="5"/>
+    </g>
+    <!-- Mouth -->
+    <ellipse cx="500" cy="366" rx="9" ry="6" fill="#13223f"/>
+  </g>
+</svg>
