@@ -61,7 +61,7 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 1px 0 rgba(255, 255, 255, .06); padding-top: .65rem; padding-bottom: .65rem;
 }
 .nav__brand { display: flex; align-items: center; gap: .65rem; }
-.nav__crest { filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .4)); }
+.nav__crest { width: auto; height: 46px; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, .4)); }
 .nav__name { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.25rem; line-height: .95; text-transform: uppercase; letter-spacing: .5px; display: flex; flex-direction: column; }
 .nav__sub { font-size: .68rem; letter-spacing: 3px; color: var(--blue-300); font-weight: 700; }
 .nav__links { display: flex; align-items: center; gap: 1.8rem; }
@@ -90,7 +90,8 @@ img { max-width: 100%; display: block; }
 @keyframes twinkle { 0%, 100% { opacity: .15; transform: scale(.7); } 50% { opacity: .95; transform: scale(1.15); } }
 
 .hero__inner { position: relative; z-index: 2; max-width: 780px; }
-.hero__crest { width: clamp(160px, 30vw, 250px); margin: 0 auto 1.4rem; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, .5)); animation: floaty 6s ease-in-out infinite; }
+.hero__crest { width: clamp(190px, 32vw, 290px); margin: 0 auto 1.4rem; filter: drop-shadow(0 24px 40px rgba(0, 0, 0, .5)); animation: floaty 6s ease-in-out infinite; }
+.hero__crest img { width: 100%; height: auto; display: block; }
 .hero__logo { width: min(540px, 88vw); margin: 0 auto 1.6rem; background: #fff; border-radius: 24px; padding: 1.5rem clamp(1.4rem, 4vw, 2.4rem); box-shadow: 0 26px 70px -24px rgba(0, 0, 0, .6); animation: floaty 6s ease-in-out infinite; }
 .hero__logo img { width: 100%; height: auto; display: block; }
 @keyframes floaty { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
@@ -202,7 +203,7 @@ img { max-width: 100%; display: block; }
 
 /* Footer */
 .footer { text-align: center; padding: 3.5rem 1.25rem; border-top: 1px solid rgba(255, 255, 255, .07); background: var(--navy-950); }
-.footer__crest { margin: 0 auto 1rem; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .5)); }
+.footer__crest { width: auto; height: 66px; margin: 0 auto 1rem; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, .5)); }
 .footer__name { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; margin: 0; }
 .footer__tag { color: var(--muted); margin: .4rem 0 1.2rem; font-size: .95rem; }
 .footer__copy { color: rgba(245, 247, 251, .45); font-size: .82rem; margin: 0; }
