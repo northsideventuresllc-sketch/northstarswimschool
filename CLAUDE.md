@@ -130,13 +130,15 @@ notifies real people.
 `northstarsswimschool.org`, with a **double s**. The GitHub repo is
 `northstarswimschool`, single s. They do not match. Copy the domain, never type it.
 
-**Known live defect (verified 2026-07-28):** the apex `northstarsswimschool.org`
-resolves to Vercel `76.76.21.21` and redirects HTTP→HTTPS, but presents no
-certificate for that hostname — `curl` returns *"no alternative certificate subject
-name matches target host name"*, so a browser shows a security warning. Only
-`www.` serves (HTTP/2 200). Fix is to add the apex to the Vercel project so a cert
-issues, then confirm both hostnames return 200. Do not tell JB the site is live
-without saying which hostname.
+**Both hostnames serve (re-verified 2026-07-28 22:45 UTC).** Apex
+`northstarsswimschool.org` now presents a valid certificate and returns **308** to
+`https://www.northstarsswimschool.org/`, which returns **200**. This closes the
+earlier apex-no-certificate defect (NI-Brain Decision #417) — the hostname had DNS
+pointed at Vercel but was never *added to the Vercel project*, so no cert issued.
+Pointing DNS at Vercel does not attach a domain (Learning #2575).
+
+Still true: **do not tell JB the site is live without naming the hostname you
+loaded**, and re-check rather than repeating this paragraph — it is a snapshot.
 
 ---
 
