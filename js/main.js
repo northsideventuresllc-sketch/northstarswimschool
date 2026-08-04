@@ -121,11 +121,97 @@
     document.querySelectorAll('.stat__num[data-count]').forEach(countUp);
   }
 
-  /* ---- Notify form (client-side; stores locally until backend is wired) ---- */
+  /* ---- Notify form ----------------------------------------------------
+     Posts to the nsss-waitlist edge function, which writes the signup to
+     NI-Brain (public.nsss_waitlist) and emails JB via Resend.
+
+     Previously this only did localStorage.setItem('nsss_waitlist', ...) and
+     showed the success message unconditionally — nothing ever read that key,
+     so every signup died in the visitor's own browser. localStorage is now
+     only an offline queue, replayed on the next successful load.
+  --------------------------------------------------------------------- */
+  var WAITLIST_ENDPOINT = 'https://kxijunwgbrlfzvgkhklo.supabase.co/functions/v1/nsss-waitlist';
+  var PENDING_KEY = 'nsss_waitlist_pending';
+
   var form = document.getElementById('notifyForm');
   var note = document.getElementById('notifyNote');
   var input = document.getElementById('notifyEmail');
+  var honeypot = document.getElementById('notifyCompany');
+  var submitBtn = document.getElementById('notifySubmit');
   function validEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  function readPending() {
+    try { return JSON.parse(localStorage.getItem(PENDING_KEY) || '[]'); }
+    catch (err) { return []; }
+  }
+  function writePending(list) {
+    try { localStorage.setItem(PENDING_KEY, JSON.stringify(list)); }
+    catch (err) { /* storage unavailable — non-fatal */ }
+  }
+  function queueOffline(email) {
+    var list = readPending();
+    if (list.indexOf(email) === -1) list.push(email);
+    writePending(list);
+  }
+
+  function postSignup(email) {
+    return fetch(WAITLIST_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: email,
+        source: 'website',
+        page_url: window.location.href,
+        referrer: document.referrer || null,
+        company: honeypot ? honeypot.value : ''
+      })
+    }).then(function (res) {
+      return res.json().catch(function () { return {}; }).then(function (data) {
+        if (!res.ok || !data.ok) {
+          var err = new Error((data && data.error) || ('http_' + res.status));
+          err.status = res.status;
+          throw err;
+        }
+        return data;
+      });
+    });
+  }
+
+  /* Recover the dead era: signups made before this fix only ever existed in the
+     visitor's own localStorage under 'nsss_waitlist'. Most are unrecoverable
+     (they live on devices that may never return), but if a past signer-upper
+     loads the site again we can still rescue their address. Queue it, don't
+     drop it. */
+  function migrateLegacy() {
+    var legacy;
+    try { legacy = JSON.parse(localStorage.getItem('nsss_waitlist') || '[]'); }
+    catch (err) { return; }
+    if (!legacy || !legacy.length) return;
+    var pending = readPending();
+    legacy.forEach(function (email) {
+      if (validEmail(email) && pending.indexOf(email) === -1) pending.push(email);
+    });
+    writePending(pending);
+    try { localStorage.removeItem('nsss_waitlist'); } catch (err) { /* non-fatal */ }
+  }
+  migrateLegacy();
+
+  // Replay anything captured while the endpoint was unreachable.
+  function flushPending() {
+    var list = readPending();
+    if (!list.length) return;
+    var remaining = [];
+    var done = 0;
+    list.forEach(function (email) {
+      postSignup(email)
+        .catch(function () { remaining.push(email); })
+        .then(function () {
+          if (++done === list.length) writePending(remaining);
+        });
+    });
+  }
+  flushPending();
+
   if (form) {
     form.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -136,15 +222,32 @@
         input.focus();
         return;
       }
-      // Persist locally; a backend (Kit / Supabase) can pick these up later.
-      try {
-        var list = JSON.parse(localStorage.getItem('nsss_waitlist') || '[]');
-        if (list.indexOf(val) === -1) list.push(val);
-        localStorage.setItem('nsss_waitlist', JSON.stringify(list));
-      } catch (err) { /* storage unavailable — non-fatal */ }
-      note.textContent = "You're on the list! We'll email you the moment registration opens. ⭐";
-      note.className = 'notify__note ok';
-      form.reset();
+
+      if (submitBtn) { submitBtn.disabled = true; }
+      note.textContent = 'Adding you to the list…';
+      note.className = 'notify__note';
+
+      postSignup(val).then(function () {
+        // Success message only after the signup actually landed.
+        note.textContent = "You're on the list! We'll email you the moment registration opens. ⭐";
+        note.className = 'notify__note ok';
+        form.reset();
+      }).catch(function (err) {
+        if (err && err.message === 'invalid_email') {
+          note.textContent = 'Please enter a valid email address.';
+          note.className = 'notify__note err';
+          input.focus();
+          return;
+        }
+        // Network/server failure: keep it locally and retry on the next visit,
+        // and tell the parent the truth instead of a fake confirmation.
+        queueOffline(val);
+        note.textContent = "We couldn't reach the server. We've saved your email and will retry — " +
+          'or email hello@northstarsswimschool.org and we\'ll add you by hand.';
+        note.className = 'notify__note err';
+      }).then(function () {
+        if (submitBtn) { submitBtn.disabled = false; }
+      });
     });
   }
 

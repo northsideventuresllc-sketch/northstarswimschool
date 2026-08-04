@@ -159,8 +159,11 @@
       <h2>Be first in the water.</h2>
       <p>Drop your email and we'll tell you the moment registration opens for August 2026 — lessons, team tryouts, and launch events.</p>
       <form class="notify__form" id="notifyForm" novalidate>
-        <input type="email" id="notifyEmail" name="email" placeholder="you@email.com" required aria-label="Email address" />
-        <button type="submit" class="btn btn--primary">Notify me</button>
+        <input type="email" id="notifyEmail" name="email" placeholder="you@email.com" required aria-label="Email address" autocomplete="email" />
+        <!-- Honeypot: hidden from humans, bots fill it and get silently dropped. -->
+        <input type="text" id="notifyCompany" name="company" tabindex="-1" autocomplete="off" aria-hidden="true"
+               style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
+        <button type="submit" class="btn btn--primary" id="notifySubmit">Notify me</button>
       </form>
       <p class="notify__note" id="notifyNote" role="status"></p>
       <div class="notify__socials">
