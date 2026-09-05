@@ -1,32 +1,30 @@
-<!-- BEGIN:ni-context-protocol -->
-## LOAD CONTEXT FIRST — before any work
+# AGENTS.md — northstarswimschool
 
-You are working inside the NORTHSiDE Ventures Group (NVG) ecosystem, on the
-**North-Stars Swim School** site — a program of the North-Stars Foundation (NFI),
-the nonprofit arm. Before touching anything:
+## What this is
 
-1. **Invoke the `ni-operator-core` skill and obey it as binding law.**
-2. **Query NI-Brain** (Supabase `kxijunwgbrlfzvgkhklo`) through the one door:
-   `select * from v_boot;` — active rules row, switches, open jobs, context, health.
-3. **Read nv-vault** when the task needs detail: `_Command Center/BRAIN-MIRROR.md`
-   → `_Command Center/CONTEXT-MAP.md` → `_meta/OPERATING-RULES.md` → today's
-   `_AI/Session Logs/YYYY-MM-DD.md`.
-4. Then read `CLAUDE.md` in this repo for the NSSS-specific rules.
+Landing page for North-Stars Swim School — a dependency-free static site (`index.html`,
+`css/styles.css`, `js/main.js`, `assets/crest.svg`). No build step, no framework, no
+`package.json`.
 
-**Newest timestamp always wins**, across every source. The vault is a mirror, not
-the door — if a vault file and the live `nv_rules` row disagree, **the row wins**.
+## Stack
 
-**There is no second memory.** Claude's built-in memory is disabled and is never a
-source of truth. The only two brains are NI-Brain and nv-vault. Anything held
-anywhere else — including this file — is a frozen snapshot and must be written into
-both brains before the session ends.
+- Static HTML/CSS/JS. `framework: null` in `vercel.json` (no build/install command).
+- No backend, database, auth, or payment surface in this repo.
 
-**Write-back after work:** log every `[DECISION]` `[LEARNED]` `[CORRECTION]` to
-NI-Brain *and* today's vault session log, in the same pass. Never ask JB to
-re-explain anything already in a brain.
+## Deploy
 
-**Operator:** Jonny — **JB**, never Jonathan. Brand: `NORTHSiDE` — exact casing always.
-<!-- END:ni-context-protocol -->
+Push to `main` → Vercel git-integration auto-deploy. No CI workflow configured — review
+`index.html` / `css` / `js` changes by eye before merging.
+
+## Brand rules (org-wide, same as every other NV repo)
+
+- Brand: Northside (title case). DEAD RULE, do not reinstate the old NORTHSiDE casing — JB
+  2026-08-25, Decision #1389.
+- Operator is **Jonny (JB)** — never "Jonathan".
+
+---
+
+<!-- Merged 2026-09-05: the context-protocol block that lived here pointed at the retired ni-operator-core skill; the boot contract in CLAUDE.md is the live one. Repo-specific sections kept. -->
 
 ---
 
