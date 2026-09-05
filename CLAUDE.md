@@ -70,7 +70,7 @@ legal exposure. Verified against NI-Brain on 2026-07-28.
    lockup are final; the red star is the shared family mark with NFI. Do not
    redraw, recolour or "improve" the crest. Swapping the logo files is a JB call.
 
-6. **`NORTHSiDE` — exact casing, always.** Operator is **JB**, never Jonathan.
+6. **Brand: Northside (title case).** DEAD RULE, do not reinstate the old NORTHSiDE casing — JB 2026-08-25, Decision #1389. Operator is **JB**, never Jonathan.
 
 ---
 
