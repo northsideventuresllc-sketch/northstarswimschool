@@ -7,6 +7,20 @@
 6. Classify the session (Repeating / Rolling / Cron / One-Off) and close the loop against your previous `session_notes_apartment` row.
 7. Say in one line what loaded. Then work.
 
+**PROOF OF GATE (added 2026-09-23, ENFORCE-GATES-FIRE-IN-FIRED-SESSIONS-0908, synced from
+nv-vault — adapted for this repo).** northstarswimschool is a dependency-free static site with no
+`package.json` and no node toolchain, so it deliberately does NOT carry the full node gate stack
+(the PreToolUse tickets-first gate and the node Stop gate) that AXON / matchfit /
+northside-intelligence run. This repo's hooks are reminder-printers only: the web session-start
+hook echoes the boot contract, the Stop hook echoes the close-out checklist. Neither enforces
+anything, and nothing here writes a `.nvg/boot-contract-fired-at` sentinel. **The correct posture
+for every session in this repo is therefore: "gates OFF, proceeding on manual discipline." There is
+no mechanical every-task enforcement in this repo by design — never claim there is.** If a
+`.nvg/boot-contract-fired-at` sentinel-writer is ever added to the session-start hook (tracked as a
+BUILD ticket, since the harness self-modification gate blocks agents from editing `.claude/hooks`
+from a normal session), this paragraph flips to the standard "found -> gates live / missing ->
+gates off" check other repos use. Until then, manual discipline is the whole gate here.
+
 EVERY TASK (Task Execution Pipeline, locked 2026-08-31): context from the two brains → goal + "done" written → plan in plain English → approval by COUNCIL (or by JB via a Telegram button when it spends money, reaches a person, goes public, deletes with no undo, hits a JB-named hold, or the council lenses disagree) → execute with graph engineering by default (fan out for looking, single thread for deciding, verifier ≠ producer, depth ≤ 2, Haiku/Sonnet for lanes) → council review + stress test → merge only via `scripts/merge-pr.mjs` in nv-vault (needs a passing `nvg_pr_council_reviews` row for the exact head SHA; conflicts resolved by COUNCIL subagents) → report in plain English → close: presence close, `session_notes_apartment` row, Decisions/Learnings written as they happen, one Slack close line under your own name.
 
 COMMS: Slack `#agent-ops` = agents talking (first line `*NAME — what happened*`). Telegram = JB only, four classes (NEEDS APPROVAL / BROKE / FINISHED / DAILY WRAP), one message per outcome, no jargon, no table names. Never Slack-DM JB.
