@@ -6,6 +6,8 @@ fi
 
 cd "$CLAUDE_PROJECT_DIR"
 
+mkdir -p "$CLAUDE_PROJECT_DIR/.nvg" && date -u +%Y-%m-%dT%H:%M:%SZ > "$CLAUDE_PROJECT_DIR/.nvg/boot-contract-fired-at"
+
 echo "[session-start] NVG BOOT CONTRACT v2 (2026-09-02) — identical in every repo and every routine"
 echo "[session-start] 1. Invoke skill nvg-operator-core — binding law. If it fails to load: stop, say so, assert nothing."
 echo "[session-start] 2. select * from v_boot; on NI-Brain kxijunwgbrlfzvgkhklo — live rules, switches, open jobs, health. The one door."
