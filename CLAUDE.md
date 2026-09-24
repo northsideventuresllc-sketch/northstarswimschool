@@ -71,11 +71,21 @@ legal exposure. Verified against NI-Brain on 2026-07-28.
    it exists, goes through a real system with a real data-protection posture — not
    a static page.
 
-4. **The waitlist form does not send anywhere yet.** `js/main.js` writes emails to
-   `localStorage` key `nsss_waitlist` and nothing drains it. A parent who signs up
-   today is not on any list anyone can read. This is the same defect shape as
-   NI-Brain Decision #415 — *the button is a label, not an action*. Do not describe
-   the waitlist as working until it posts to Kit or Supabase and a row is verified.
+4. **The waitlist form POSTs to a Supabase edge function** — `js/main.js` sends
+   `{email, source, page_url, referrer, company}` to
+   `https://kxijunwgbrlfzvgkhklo.supabase.co/functions/v1/nsss-waitlist`
+   (source `supabase/functions/nsss-waitlist/index.ts`), which dedupes by email,
+   inserts the row into NI-Brain `public.nsss_waitlist`, and emails JB via Resend
+   (NI key first, Match Fit key as fallback). `localStorage` is now only an
+   offline queue (`nsss_waitlist_pending`) used when the fetch fails, replayed on
+   the next page load — not the storage of record. A one-time migration
+   (`migrateLegacy()`) rescues any address still sitting in the old dead
+   `nsss_waitlist` key from before this endpoint existed and re-queues it.
+   The warning spirit stands: do not tell JB the waitlist works end-to-end
+   without a verified row in `nsss_waitlist` (or a confirmed `emailed` alert) —
+   posting to the endpoint is not proof by itself if the function or DB write
+   is failing. **Corrected 2026-09-24 (full audit): previous text said
+   localStorage-only; stale.**
 
 5. **Brand crest is LOCKED** (NI-Brain Decision #303). The crest and the landscape
    lockup are final; the red star is the shared family mark with NFI. Do not
