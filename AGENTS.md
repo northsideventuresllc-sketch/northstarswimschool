@@ -48,7 +48,15 @@ No framework, no build step, no package manager, no tests. `index.html` +
 | Task | Command |
 |------|---------|
 | Serve locally | `python3 -m http.server 8000` |
+| Test (link/asset checker) | `node scripts/verify-live.mjs` |
 | Deploy | push to `main` — Vercel builds from the default branch |
+
+**CI (FRONTIER-05-TESTS-ALL-REPOS, 2026-09-25):** `.github/workflows/test.yml` runs
+`node scripts/verify-live.mjs` on every `pull_request`. It is a dependency-free static
+checker (no browser, no network) — it parses `index.html` and `js/main.js` and confirms
+every local link/asset resolves on disk, every in-page anchor has a matching id, and the
+waitlist `WAITLIST_ENDPOINT` still points at the real Supabase edge function rather than
+a placeholder. It never actually POSTs to the waitlist endpoint.
 
 ## CODE-CHECK GATE
 
