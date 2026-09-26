@@ -71,7 +71,7 @@ function fmtDeliverable(d) {
   return String(d);
 }
 
-function buildRows(a) {
+export function buildRows(a) {
   const date = new Date().toISOString().slice(0, 10);
   const raw = [
     `CLOSE-OUT ${a.agent} — ${a.task}`,
@@ -125,4 +125,7 @@ async function main() {
     console.log(JSON.stringify(rows, null, 2));
   }
 }
-main().catch((e) => { console.error('close-out failed: ' + e.message); process.exit(3); });
+// Only run as a CLI, never on import — buildRows() is imported directly by tests.
+if (import.meta.url === `file://${process.argv[1]}`) {
+  main().catch((e) => { console.error('close-out failed: ' + e.message); process.exit(3); });
+}
